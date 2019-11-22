@@ -60,11 +60,11 @@ const CONNECTIONSTRING = "mongodb+srv://butterKing:fingerLickinGood@butternote-2
 
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc("/people", handlers.GetAllPeopleEndpoint).Methods("GET")
-	router.HandleFunc("/people/{id}", handlers.GetPersonEndpoint).Methods("GET")
-	router.HandleFunc("/people", handlers.CreatePersonEndpoint).Methods("POST")
-	router.HandleFunc("/people", handlers.DeletePersonEndpoint).Methods("DELETE")
-	router.HandleFunc("/people/{id}", handlers.UpdatePersonEndpoint).Methods("PUT")
+	router.HandleFunc("/note", handlers.GetAllPeopleEndpoint).Methods("GET")
+	router.HandleFunc("/note/{id}", handlers.GetPersonEndpoint).Methods("GET")
+	router.HandleFunc("/note", handlers.CreatePersonEndpoint).Methods("POST")
+	router.HandleFunc("/note", handlers.DeletePersonEndpoint).Methods("DELETE")
+	router.HandleFunc("/note/{id}", handlers.UpdatePersonEndpoint).Methods("PUT")
 	fmt.Println("Starting server on port 8000...")
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
