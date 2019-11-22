@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"github.com/LaughingBudda/butternote/models"
+	"github.com/LaughingBudda/ButterNote/models"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -38,7 +38,7 @@ func init() {
 }
 
 // InsertManyValues inserts many items from byte slice
-func InsertManyValues(people []models.Person) {
+func InsertManyValues(people []models.Note) {
 	var ppl []interface{}
 	for _, p := range people {
 		ppl = append(ppl, p)
@@ -49,8 +49,8 @@ func InsertManyValues(people []models.Person) {
 	}
 }
 
-// InsertOneValue inserts one item from Person model
-func InsertOneValue(person models.Person) {
+// InsertOneValue inserts one item from Note model
+func InsertOneValue(person models.Note) {
 	fmt.Println(person)
 	_, err := db.Collection(COLLNAME).InsertOne(context.Background(), person)
 	if err != nil {
@@ -59,13 +59,13 @@ func InsertOneValue(person models.Person) {
 }
 
 // GetAllPeople returns all people from DB
-func GetAllPeople() []models.Person {
-	cur, err := db.Collection(COLLNAME).Find(context.Background(), nil, nil)
+func GetAllPeople() []models.Note {
+	cur, err := db.Collection(COLLNAME).Find(context.Background(), bson.D{})
 	if err != nil {
 		log.Fatal(err)
 	}
-	var elements []models.Person
-	var elem models.Person
+	var elements []models.Note
+	var elem models.Note
 	// Get the next result from the cursor
 	for cur.Next(context.Background()) {
 		err := cur.Decode(&elem)
@@ -82,7 +82,7 @@ func GetAllPeople() []models.Person {
 }
 
 // DeletePerson deletes an existing person
-func DeletePerson(person models.Person) {
+func DeletePerson(person models.Note) {
 	_, err := db.Collection(COLLNAME).DeleteOne(context.Background(), person, nil)
 	if err != nil {
 		log.Fatal(err)
@@ -90,32 +90,16 @@ func DeletePerson(person models.Person) {
 }
 
 // UpdatePerson updates an existing person
-func UpdatePerson(person models.Person, personID string) {
-	/*doc := db.Collection(COLLNAME).FindOneAndUpdate(
-		context.Background(),
-		bson.NewDocument(
-			bson.EC.String("id", personID),
-		),
-		bson.NewDocument(
-			bson.EC.SubDocumentFromElements("$set",
-				bson.EC.String("firstname", person.Firstname),
-				bson.EC.String("lastname", person.Lastname),
-				bson.EC.String("contactinfo.city", person.City),
-				bson.EC.String("contactinfo.zipcode", person.Zipcode),
-				bson.EC.String("contactinfo.phone", person.Phone)),
-		),
-		nil)*/
+func UpdatePerson(person models.Note, personID string) {
 	doc := db.Collection(COLLNAME).FindOneAndUpdate(
 		context.Background(),
 		bson.D{{"id", personID}},
 		bson.D{{
 			"$set", 
-			bson.D{{"firstname", person.Firstname}, 
-			{"lastname", person.Lastname}, 
-			{"contactinfo.city", person.City}, 
-			{"contactinfo.zipcode", person.Zipcode}, 
-			{"contactinfo.phone", person.Phone}},
-		}},
+			bson.D{{"time", person.Timestamp}, 
+			{"content", person.Content}, 
+			{"contactinfo.id", person.ID}, 
+			{"contactinfo.name", person.Name}}}},
 	)
 	fmt.Println(doc)
 }

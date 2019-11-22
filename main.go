@@ -1,18 +1,18 @@
 package main
 
 import (
-	"context"
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"log"
-	"net/http"
-	"github.com/LaughingBudda/butternote/handlers"
-	"github.com/LaughingBudda/butternote/models"
-
-	"github.com/gorilla/mux"
+	/*"context"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	/*"encoding/json"
+	"github.com/LaughingBudda/ButterNote/models"
+	"io/ioutil"*/
+	"fmt"
+	"log"
+	"net/http"
+	"github.com/LaughingBudda/ButterNote/handlers"
+
+	"github.com/gorilla/mux"
 )
 
 // DBNAME Database name
@@ -25,10 +25,10 @@ const COLLECTION = "notes"
 const CONNECTIONSTRING = "mongodb+srv://butterKing:fingerLickinGood@butternote-2m1oj.mongodb.net/test?retryWrites=true&w=majority"
 //const CONNECTIONSTRING = "mongodb://localhost:27017"
 
-func init() {
+/*func init() {
 	// Populates database with dummy data
 
-	var people []models.Person
+	var people []models.Note
 
 	client, err := mongo.NewClient(options.Client().ApplyURI(CONNECTIONSTRING))
 	if err != nil {
@@ -40,14 +40,14 @@ func init() {
 	}
 	db := client.Database(DBNAME)
 
-	// Load values from JSON file to model
-	byteValues, err := ioutil.ReadFile("person_data.json")
+	Load values from JSON file to model
+	byteValues, err := ioutil.ReadFile("sample_data.json")
 	if err != nil {
 		log.Fatal(err)
 	}
 	json.Unmarshal(byteValues, &people)
 
-	// Insert people into DB
+	Insert people into DB
 	var ppl []interface{}
 	for _, p := range people {
 		ppl = append(ppl, p)
@@ -56,7 +56,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-}
+}*/
 
 func main() {
 	router := mux.NewRouter()

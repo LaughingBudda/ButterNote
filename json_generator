@@ -1,15 +1,15 @@
 https://www.json-generator.com/
 
 [
-  '{{repeat(5, 7)}}',
+  '{{repeat(15, 30)}}',
   {
-    _id: '{{objectId()}}',
-    firstname: '{{firstName()}}',
-    lastname: '{{surname()}}',
-    contactinfo: {
-        city: '{{city()}}',
-      zipcode: '{{integer(100, 10000)}}',
-        phone: '+1 {{phone()}}'
+    id: '{{objectId()}}',
+    time: '{{integer(1546300800, 1574400782)}}',
+    content: '{{lorem()}}',
+    User: {
+        id: '{{guid()}}',
+        username: '{{firstName()}}'
     }
   }
 ]
+

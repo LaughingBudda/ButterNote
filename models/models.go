@@ -1,13 +1,12 @@
 package models
 
-type Person struct {
+type Note struct {
 	ID          string `json:"id,omitempty"`
-	Firstname   string `json:"firstname,omitempty"`
-	Lastname    string `json:"lastname,omitempty"`
-	Contactinfo `json:"contactinfo,omitempty"`
+	Timestamp   int `json:"time,omitempty"`
+	Content    	string `json:"content,omitempty"`
+	User `json:"User,omitempty"`
 }
-type Contactinfo struct {
-	City    string `json:"city,omitempty"`
-	Zipcode string `json:"zipcode,omitempty"`
-	Phone   string `json:"phone,omitempty"`
+type User struct {	
+	ID 			string `json:"id,omitempty"`
+	Name 		string `json:"username,omitempty"`
 }

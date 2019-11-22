@@ -3,13 +3,13 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
-	"github.com/LaughingBudda/butternote/dao"
-	"github.com/LaughingBudda/butternote/models"
+	"github.com/LaughingBudda/ButterNote/dao"
+	"github.com/LaughingBudda/ButterNote/models"
 
 	"github.com/gorilla/mux"
 )
 
-var people []models.Person
+var people []models.Note
 
 // GetPersonEndpoint gets a person
 func GetPersonEndpoint(w http.ResponseWriter, r *http.Request) {
@@ -32,7 +32,7 @@ func GetAllPeopleEndpoint(w http.ResponseWriter, r *http.Request) {
 
 // CreatePersonEndpoint creta a person
 func CreatePersonEndpoint(w http.ResponseWriter, r *http.Request) {
-	var person models.Person
+	var person models.Note
 	_ = json.NewDecoder(r.Body).Decode(&person)
 	dao.InsertOneValue(person)
 	json.NewEncoder(w).Encode(person)
@@ -40,7 +40,7 @@ func CreatePersonEndpoint(w http.ResponseWriter, r *http.Request) {
 
 // DeletePersonEndpoint delets a person
 func DeletePersonEndpoint(w http.ResponseWriter, r *http.Request) {
-	var person models.Person
+	var person models.Note
 	_ = json.NewDecoder(r.Body).Decode(&person)
 	dao.DeletePerson(person)
 }
@@ -48,7 +48,7 @@ func DeletePersonEndpoint(w http.ResponseWriter, r *http.Request) {
 // UpdatePersonEndpoint updates a person
 func UpdatePersonEndpoint(w http.ResponseWriter, r *http.Request) {
 	personID := mux.Vars(r)["id"]
-	var person models.Person
+	var person models.Note
 	_ = json.NewDecoder(r.Body).Decode(&person)
 	dao.UpdatePerson(person, personID)
 
